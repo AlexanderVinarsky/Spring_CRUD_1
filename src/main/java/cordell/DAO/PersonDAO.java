@@ -50,9 +50,10 @@ public class PersonDAO {
 
     public Person showPerson(int id){
         try {
-            String sql = "SELECT * FROM people WHERE id =" + id;
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+            String sql = "SELECT * FROM people WHERE id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
             Person person = new Person();
             person.setId(resultSet.getInt("id"));
@@ -65,9 +66,10 @@ public class PersonDAO {
 
     public void save(Person person) {
         try{
-            Statement statement = connection.createStatement();
-            String sql = "INSERT INTO people VALUES(DEFAULT, '" + person.getName() + "')";
-            statement.executeUpdate(sql);
+            String sql = "INSERT INTO people VALUES(DEFAULT, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, person.getName());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -75,9 +77,11 @@ public class PersonDAO {
 
     public void update(int id, Person updatedPerson) {
         try {
-            String sql = "UPDATE people SET name=" + "'" + updatedPerson.getName() + "'" + " where id =" + id;
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(sql);
+            String sql = "UPDATE people SET name= ? where id =?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, updatedPerson.getName());
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
