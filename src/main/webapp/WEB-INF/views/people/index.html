@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <title>d</title>
 </head>
-<body>
+    <body>
+    <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+        <button type="submit"> Delete </button> </form>
     <p th:text="${person.getName()}">VALUE</p>
     <p th:text="${person.getId()}">VALUE</p>
-</body>
+    <a th:href="@{/people/{id}/edit(id=${person.getId()})}"> Edit </a>
+    </body>
+
 </html>

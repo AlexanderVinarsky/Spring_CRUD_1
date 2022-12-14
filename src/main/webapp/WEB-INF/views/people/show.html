@@ -5,8 +5,9 @@
     <title>People list</title>
 </head>
 <body>
-<form method="get" action="/people/new">
-    <button type = "submit"> Create new person</button>
+<form method="GET" action="/people/new">
+    <button type="submit"> Create new person </button>
+    </br>
 </form>
 <div th:each="person : ${people}">
   <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()}">user</a>
