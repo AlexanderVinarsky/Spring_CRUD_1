@@ -1,11 +1,16 @@
 package cordell.models;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class Person {
     private int id;
+
+    @NotEmpty(message = "Name should not be empty!")
+    @Size(min = 2, max = 30, message = "Name size is not valid!")
     private String name;
 
     public Person() {
-
     }
 
     public Person(int id, String name) {

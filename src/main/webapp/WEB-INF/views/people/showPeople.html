@@ -5,10 +5,11 @@
     <title>People list</title>
 </head>
 <body>
+<p>People list:</p>
 <form method="GET" action="/people/new">
     <button type="submit"> Create new person </button>
-    </br>
 </form>
+</br>
 <div th:each="person : ${people}">
   <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()}">user</a>
 </div>
